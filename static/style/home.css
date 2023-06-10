@@ -1,0 +1,108 @@
+body {
+    background-color: #000000;
+    color: #fff;
+    font-family: Consolas;
+    margin: 0;
+    padding: 0;
+}
+#background {
+    position: fixed;
+    overflow: hidden;
+    top: -500px;
+    min-width: 100vw;
+    z-index: -1;
+    opacity: 0.05;
+}
+.invisible {
+    opacity: 0;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#pfp {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45%;
+}
+.center p {
+    text-align: center;
+    font-size: 46px;
+    opacity: 0.5;
+}
+.icons {
+    margin-inline: 15vw;
+    display: flex;
+    justify-content: space-around;
+    transition-duration: 0.5s;
+}
+.icons a {
+    opacity: 0.6;
+    transition-duration: 0.5s;
+}
+.icons a:hover {
+    opacity: 1;
+    transform: translateY(-10px);
+}
+
+.contact {
+    position: fixed;
+    margin-top: 1vh;
+}
+li {
+    margin-bottom: 20px;
+}
+.contact img {
+    display: inline-block;
+}
+.contact p {
+    display: inline-block;
+    margin-left: 10px;
+    margin: 0;
+    font-size: 20px;
+}
+#discord-contact {
+    display: inline-flex;
+    align-items: center; 
+    gap: 10px;
+}
+.contact button {
+    all: unset;
+    display: inline-flex;
+    align-items: center; 
+    gap: 10px;
+}
+.contact button:hover {
+    cursor: pointer;
+}
+.contact a {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.contact a:hover {
+    cursor: pointer;
+}
+
+#copied-text {
+    border-radius: 5px;
+    background-color: #4E5D94;
+}
+#copied-text p {
+    margin: 0;
+    padding: 5px;
+    font-size: 16px;
+}
+.fade-in {
+    opacity: 1 !important;
+    transition: opacity 0.5s ease;
+}
+.fade-out {
+    opacity: 0 !important;
+    transition: opacity 0.5s ease;
+}
