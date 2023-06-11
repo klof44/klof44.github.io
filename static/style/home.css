@@ -53,8 +53,12 @@ body {
     position: fixed;
     margin-top: 1vh;
 }
-li {
+.contact li {
     margin-bottom: 20px;
+    transition-duration: 0.5s;
+}
+.contact li:hover {
+    transform: translateX(5px);
 }
 .contact img {
     display: inline-block;
@@ -92,11 +96,17 @@ li {
 #copied-text {
     border-radius: 5px;
     background-color: #4E5D94;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 #copied-text p {
     margin: 0;
     padding: 5px;
     font-size: 16px;
+}
+#copied-text-align {
+    display: flex;
+    align-items: center;
 }
 .fade-in {
     opacity: 1 !important;
