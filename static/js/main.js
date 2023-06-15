@@ -1,5 +1,5 @@
 function CopyDiscord() {
-    navigator.clipboard.writeText('klof44#6612');
+    navigator.clipboard.writeText('klof44');
 
     var popup = document.getElementById("copied-text");
     popup.classList.remove("fade-out");

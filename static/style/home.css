@@ -33,6 +33,8 @@ body {
     text-align: center;
     font-size: 46px;
     opacity: 0.5;
+    margin-top: 10px;
+    margin-bottom: 40px;
 }
 .icons {
     margin-inline: 15vw;
