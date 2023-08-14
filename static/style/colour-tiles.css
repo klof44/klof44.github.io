@@ -19,6 +19,7 @@ body {
     width: 86.4vw;
     height: 41.2vw;
     padding: 0.5vw;
+    user-select: none;
 }
 #start {
     font-size: 5vw;
@@ -43,4 +44,21 @@ body {
     margin: auto;
     margin-top: 10vh;
     margin-bottom: 0;
+}
+#reset {
+    font-size: 2vw;
+    width: 15vw;
+    margin-left: 6.25vw;
+    float: left;
+    background-color: #111111;
+    color: white;
+}
+#mute {
+    all: unset;
+    margin-right: 6.25vw;
+    float: right;
+    color: white;
+}
+#mute:hover {
+    cursor: pointer;
 }

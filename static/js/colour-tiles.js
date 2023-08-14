@@ -14,8 +14,16 @@ let tileNames = {
 }
 
 let hitSound = new Audio("/static/audio/colour-tiles/ding.wav")
+hitSound.volume = 0.5
+
 let missSound = new Audio("/static/audio/colour-tiles/badBeep.wav")
+missSound.volume = 0.5
+
 let winSound = new Audio("/static/audio/colour-tiles/developerWin.wav")
+winSound.volume = 0.5
+winSound.muted = false
+
+let mute = false
 
 function StartGame() {
     let start = document.getElementById("start")
@@ -36,28 +44,35 @@ function StartGame() {
     StartTimer()
 }
 
-function EndGame() {
+function EndGame(restarted = false) {
     tiles = []
 
     let board = document.getElementById("board")
     board.innerHTML = ""
     board.style.flexDirection = "column"
 
+    if (!restarted) {
+        winSound.play()
+
+        let endText = document.createElement("p")
+        endText.innerHTML = `Game Over!\r\nScore: ${document.getElementById("score").innerHTML.slice(7)}`
+        endText.id = "end-text"
+
+        board.appendChild(endText)
+    }
+
     let start = document.createElement("button")
     start.innerHTML = "Start!"
     start.id = "start"
     start.onclick = StartGame
 
-    let endText = document.createElement("p")
-    endText.innerHTML = `Game Over!\r\nScore: ${document.getElementById("score").innerHTML.slice(7)}`
-    endText.id = "end-text"
-
-    board.appendChild(endText)
     board.appendChild(start)
-
-    winSound.play()
 }
 
+function ResetGame() {
+    clearInterval(interval)
+    EndGame(true)
+}
 
 function createTiles() {
     for (let i = 0; i < 15; i++) {
@@ -83,6 +98,7 @@ function CreateBoard() {
             tile.src = "/static/img/colour-tiles/" + tileNames[tiles[i][j]]
             tile.classList.add("tile")
             tile.id = i + "-" + j
+            tile.draggable = false
             if (flip) {
                 tile.style.backgroundColor = "#222"
             }
@@ -94,9 +110,7 @@ function CreateBoard() {
                     matches = searchMatches(i, j)
 
                     if (matches.length == 0) {
-                        time -= 10
-                        let timer = document.getElementById("time")
-                        timer.innerHTML = `Time: ${time}`
+                        updateTime(-10)
                         missed = true
                     }
 
@@ -111,16 +125,16 @@ function CreateBoard() {
                     })
                 }
                 else {
-                    time -= 10
-                    let timer = document.getElementById("time")
-                    timer.innerHTML = `Time: ${time}`
+                    updateTime(-10)
                     missed = true
                 }
-                if (missed) {
-                    missSound.cloneNode(true).play()
-                }
-                else {
-                    hitSound.cloneNode(true).play()
+                if (!mute) {
+                    if (missed) {
+                        missSound.cloneNode(true).play()
+                    }
+                    else {
+                        hitSound.cloneNode(true).play()
+                    }
                 }
             })
 
@@ -131,20 +145,26 @@ function CreateBoard() {
 }
 
 let time = 120
+let interval = null
 function StartTimer() {
-    let timer = document.getElementById("time")
-    timer.innerHTML = `Time: ${time}`
-
-    let interval = setInterval(() => {
+    interval = setInterval(() => {
         time--
-        timer.innerHTML = `Time: ${time}`
-
-        if (time <= 0) {
-            timer.innerHTML = "Time: 0"
-            clearInterval(interval)
-            EndGame()
-        }
+        updateTime()
     }, 1000)
+}
+
+function updateTime(change = 0) {
+    let timer = document.getElementById("time")
+    time += change
+
+    if (time <= 0) {
+        timer.innerHTML = "Time: 0"
+        clearInterval(interval)
+        EndGame()
+    }
+    else {
+        timer.innerHTML = `Time: ${time}`
+    }
 }
 
 function searchMatches(xpos, ypos) {
@@ -225,6 +245,17 @@ function addScore() {
     score.innerHTML = `Score: ${parseInt(score.innerHTML.slice(7)) + 1}`
 }
 
-function Sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function Mute() {
+    mute = !mute
+
+    let muteIcon = document.getElementById("mute").children[0]
+
+    if (mute) {
+        muteIcon.src = "/static/img/colour-tiles/Mute_Icon.svg"
+        winSound.muted = true
+    }
+    else {
+        muteIcon.src = "/static/img/colour-tiles/Speaker_Icon.svg"
+        winSound.muted = false
+    }
 }
