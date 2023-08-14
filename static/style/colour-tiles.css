@@ -1,0 +1,46 @@
+body {
+    font-family: 'consolas';
+    background-color: #222222;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+}
+.tile {
+    width: 2.5vw;
+    padding: 0.1vw;
+
+}
+#board {
+    background-color: #111111;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    border: #ffffff solid 0.1vw;
+    width: 86.4vw;
+    height: 41.2vw;
+    padding: 0.5vw;
+}
+#start {
+    font-size: 5vw;
+    width: 20vw;
+    height: min-content;
+    margin: auto;
+    background-color: #222222;
+    border: none;
+    color: white;
+}
+.info {
+    width: 87.6vw;
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+}
+.info p {
+    margin: 3px;
+}
+#end-text {
+    font-size: 3vw;
+    margin: auto;
+    margin-top: 10vh;
+    margin-bottom: 0;
+}
