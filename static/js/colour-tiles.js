@@ -25,6 +25,21 @@ winSound.muted = false
 
 let mute = false
 
+let board = document.getElementById("board")
+let flashlight = document.getElementById("flashlight")
+flashlight.style.width = board.getBoundingClientRect().width - 2 + "px"
+flashlight.style.height = board.getBoundingClientRect().height - 2 + "px"
+flashlight.style.top = board.getBoundingClientRect().top + "px"
+flashlight.style.left = board.getBoundingClientRect().left + "px"
+
+let mousex = 0
+let mousey = 0
+document.addEventListener("mousemove", (e) => {
+    mousex = e.clientX
+    mousey = e.clientY
+    UpdateFL()
+})
+
 function StartGame() {
     let start = document.getElementById("start")
     start.remove()
@@ -32,13 +47,13 @@ function StartGame() {
     let endText = document.getElementById("end-text")
     endText?.remove()
 
-    let score = document.getElementById("score")
-    score.innerHTML = "Score: 0"
+    let scoreElement = document.getElementById("score")
+    scoreElement.innerHTML = "Score: 0"
 
-    let board = document.getElementById("board")
     board.style.flexDirection = "row"
 
     time = 120
+    score = 0
 
     let modsMenu = document.getElementById("mods")
     modsMenu.classList.add("mods-locked")
@@ -51,7 +66,6 @@ function StartGame() {
 function EndGame(restarted = false) {
     tiles = []
 
-    let board = document.getElementById("board")
     board.innerHTML = ""
     board.style.flexDirection = "column"
 
@@ -100,7 +114,6 @@ function createTiles() {
 }
 
 function CreateBoard() {
-    let board = document.getElementById("board")
     let flip = true
 
     for (let i = 0; i < 15; i++) {
@@ -147,6 +160,8 @@ function CreateBoard() {
                         hitSound.cloneNode(true).play()
                     }
                 }
+
+                UpdateFL()
             })
 
             board.appendChild(tile)
@@ -255,9 +270,11 @@ function searchMatches(xpos, ypos) {
     return matches
 }
 
+let score = 0
 function addScore() {
-    let score = document.getElementById("score")
-    score.innerHTML = `Score: ${parseInt(score.innerHTML.slice(7)) + 1}`
+    score += 1 * multiplier
+    let scoreElement = document.getElementById("score")
+    scoreElement.innerHTML = `Score: ${Math.round(score * 100) / 100}`
 }
 
 function Mute() {
@@ -275,11 +292,12 @@ function Mute() {
     }
 }
 
+let multiplier = 1;
+
 let sdMod = false;
 function ToggleSD() {
     if (time != 0) return;
 
-    let sd = document.getElementById("sudden-death");
     let sdIcon = document.getElementById("sudden-death").children[0];
 
     if (sdMod) {
@@ -290,4 +308,34 @@ function ToggleSD() {
         sdMod = true;
         sdIcon.classList.add("active-mod");
     }
+}
+
+let flMod = false;
+function ToggleFL() {
+    if (time != 0) return;
+
+    let flIcon = document.getElementById("flashlight-mod").children[0];
+    let flashlight = document.getElementById("flashlight");
+
+    if (flMod) {
+        flMod = false;
+        flIcon.classList.remove("active-mod");
+        flashlight.style.display = "none";
+        multiplier -= 0.12;
+    }
+    else {
+        flMod = true;
+        flIcon.classList.add("active-mod");
+        flashlight.style.display = "block";
+        multiplier += 0.12;
+    }
+
+    let modMultiplier = document.getElementById("mod-multiplier");
+    modMultiplier.innerHTML = `Multiplier: x${multiplier}`;
+}
+function UpdateFL() {
+    if (flMod && time != 0)
+        flashlight.style.backgroundImage = `radial-gradient(circle at ${mousex - board.getBoundingClientRect().left}px ${mousey - board.getBoundingClientRect().top}px, transparent, #000 ${((time) / 1.5)}%)`;
+    else
+        flashlight.style.backgroundImage = "none";
 }
