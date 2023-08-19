@@ -62,3 +62,27 @@ body {
 #mute:hover {
     cursor: pointer;
 }
+.mods {
+    display: flex;
+    padding-inline: 2vw;
+    height: 5vw;
+}
+.mods-locked {
+    opacity: 0.5;
+}
+.mods button {
+    all: unset;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.mods button:hover {
+    cursor: pointer;
+}
+.mods img {
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.active-mod {
+    transform: rotate(8deg) scale(1.1);
+    background-color: #fff;
+    box-shadow: 0 0 1vw -0.5vw #fff;
+}

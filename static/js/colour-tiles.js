@@ -16,11 +16,11 @@ let tileNames = {
 let hitSound = new Audio("/static/audio/colour-tiles/ding.wav")
 hitSound.volume = 0.5
 
-let missSound = new Audio("/static/audio/colour-tiles/badBeep.wav")
+let missSound = new Audio("/static/audio/colour-tiles/combobreak.mp3")
 missSound.volume = 0.5
 
 let winSound = new Audio("/static/audio/colour-tiles/developerWin.wav")
-winSound.volume = 0.5
+winSound.volume = 0.01
 winSound.muted = false
 
 let mute = false
@@ -39,6 +39,10 @@ function StartGame() {
     board.style.flexDirection = "row"
 
     time = 120
+
+    let modsMenu = document.getElementById("mods")
+    modsMenu.classList.add("mods-locked")
+
     createTiles()
     CreateBoard()
     StartTimer()
@@ -52,7 +56,9 @@ function EndGame(restarted = false) {
     board.style.flexDirection = "column"
 
     if (!restarted) {
-        winSound.play()
+        if (!mute) {
+            winSound.cloneNode(true).play()
+        }
 
         let endText = document.createElement("p")
         endText.innerHTML = `Game Over!\r\nScore: ${document.getElementById("score").innerHTML.slice(7)}`
@@ -67,6 +73,11 @@ function EndGame(restarted = false) {
     start.onclick = StartGame
 
     board.appendChild(start)
+
+    let modsMenu = document.getElementById("mods")
+    modsMenu.classList.remove("mods-locked")
+
+    time = 0;
 }
 
 function ResetGame() {
@@ -144,7 +155,7 @@ function CreateBoard() {
     }
 }
 
-let time = 120
+let time = 0
 let interval = null
 function StartTimer() {
     interval = setInterval(() => {
@@ -154,6 +165,10 @@ function StartTimer() {
 }
 
 function updateTime(change = 0) {
+    if (sdMod && change < 0) {
+        EndGame()
+    }
+
     let timer = document.getElementById("time")
     time += change
 
@@ -257,5 +272,22 @@ function Mute() {
     else {
         muteIcon.src = "/static/img/colour-tiles/Speaker_Icon.svg"
         winSound.muted = false
+    }
+}
+
+let sdMod = false;
+function ToggleSD() {
+    if (time != 0) return;
+
+    let sd = document.getElementById("sudden-death");
+    let sdIcon = document.getElementById("sudden-death").children[0];
+
+    if (sdMod) {
+        sdMod = false;
+        sdIcon.classList.remove("active-mod");
+    }
+    else {
+        sdMod = true;
+        sdIcon.classList.add("active-mod");
     }
 }
