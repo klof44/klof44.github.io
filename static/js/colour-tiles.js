@@ -27,10 +27,6 @@ let mute = false
 
 let board = document.getElementById("board")
 let flashlight = document.getElementById("flashlight")
-flashlight.style.width = board.getBoundingClientRect().width - 2 + "px"
-flashlight.style.height = board.getBoundingClientRect().height - 2 + "px"
-flashlight.style.top = board.getBoundingClientRect().top + "px"
-flashlight.style.left = board.getBoundingClientRect().left + "px"
 
 let mousex = 0
 let mousey = 0
@@ -54,6 +50,7 @@ function StartGame() {
 
     time = 120
     score = 0
+    updateTime()
 
     let modsMenu = document.getElementById("mods")
     modsMenu.classList.add("mods-locked")
@@ -120,6 +117,9 @@ function CreateBoard() {
         for (let j = 0; j < 32; j++) {
             let tile = document.createElement("img")
             tile.src = "/static/img/colour-tiles/" + tileNames[tiles[i][j]]
+            if (hrMod) {
+                tile.classList.add("hr-tile")
+            }
             tile.classList.add("tile")
             tile.id = i + "-" + j
             tile.draggable = false
@@ -180,6 +180,10 @@ function StartTimer() {
 }
 
 function updateTime(change = 0) {
+    if (hrMod) {
+        change = change * 2
+    }
+
     if (sdMod && change < 0) {
         EndGame()
     }
@@ -331,11 +335,37 @@ function ToggleFL() {
     }
 
     let modMultiplier = document.getElementById("mod-multiplier");
-    modMultiplier.innerHTML = `Multiplier: x${multiplier}`;
+    modMultiplier.innerHTML = `Multiplier: x${Math.round(multiplier * 100) / 100}`;
 }
+
 function UpdateFL() {
+    flashlight.style.width = board.getBoundingClientRect().width - 2 + "px"
+    flashlight.style.height = board.getBoundingClientRect().height - 2 + "px"
+    flashlight.style.top = board.getBoundingClientRect().top + "px"
+    flashlight.style.left = board.getBoundingClientRect().left + "px"
     if (flMod && time != 0)
         flashlight.style.backgroundImage = `radial-gradient(circle at ${mousex - board.getBoundingClientRect().left}px ${mousey - board.getBoundingClientRect().top}px, transparent, #000 ${((time) / 1.5)}%)`;
     else
         flashlight.style.backgroundImage = "none";
+}
+
+let hrMod = false;
+function ToggleHR() {
+    if (time != 0) return;
+
+    let hrIcon = document.getElementById("hardrock-mod").children[0];
+
+    if (hrMod) {
+        hrMod = false;
+        hrIcon.classList.remove("active-mod");
+        multiplier -= 0.06;
+    }
+    else {
+        hrMod = true;
+        hrIcon.classList.add("active-mod");
+        multiplier += 0.06;
+    }
+
+    let modMultiplier = document.getElementById("mod-multiplier");
+    modMultiplier.innerHTML = `Multiplier: x${Math.round(multiplier * 100) / 100}`;
 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/style/colour-tiles.css">
 </head>
 <body>
+    <h1 class="title">Colour Tiles</h1>
     <div class="info">
         <p id="time">Time: 0</p>
         <p id="score">Score: 0</p>
@@ -16,14 +17,30 @@
         <button id="start" onclick="StartGame()">Start!</button>
     </div>
     <div>
-        <button id="mute" onclick="Mute()"><img src="/static/img/colour-tiles/Speaker_Icon.svg" height="50"></button>
+        <button id="mute" onclick="Mute()"><img src="/static/img/colour-tiles/Speaker_Icon.svg" width="60"></button>
         <button id="reset" onclick="ResetGame()">Reset</button>
     </div>
     <div id="mods" class="mods">
         <button id="sudden-death" onclick="ToggleSD()"><img src="/static/img/colour-tiles/sd_mod.png" width="60"></button>
         <button id="flashlight-mod" onclick="ToggleFL()"><img src="/static/img/colour-tiles/fl_mod.png" width="60"></button>
+        <button id="hardrock-mod" onclick="ToggleHR()"><img src="/static/img/colour-tiles/hr_mod.png" width="60"></button>
         <p id="mod-multiplier">Multiplier: x1</p>
     </div>
+
+    <div class="howto">
+        <h1>↓ How to Play ↓</h1>
+        <p>
+            Click blank spaces where tiles of the same colour line up.<br>
+            Clicking anywhere else will lose you 10 seconds.
+        </p>
+        <img src="/static/img/colour-tiles/tutorial.png" alt="tutorial">
+    </div>
+
+    <div class="footer">
+        <a class="with-image" href="/"><img src="/static/img/pfp.png" height="30" alt="pfp"> By klof44</a>
+        <a href="https://en.gamesaien.com/game/color_tiles/" target="_blank">Original Concept from GameSaien</a>
+    </div>
+
     <script src="/static/js/colour-tiles.js"></script>
 </body>
 </html>

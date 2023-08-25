@@ -4,11 +4,20 @@ body {
     color: #ffffff;
     text-align: center;
     margin: 0;
+    font-size: 1.8vh;
+}
+.title {
+    margin-bottom: 0;
+    margin-top: 2vh;
 }
 .tile {
     width: 2.5vw;
     padding: 0.1vw;
-
+}
+.hr-tile {
+    width: 0.8vw;
+    height: 0.8vw;
+    padding: 0.95vw;
 }
 #board {
     background-color: #111111;
@@ -48,7 +57,7 @@ body {
 #reset {
     font-size: 2vw;
     width: 15vw;
-    margin-left: 6.25vw;
+    margin-left: 6.2vw;
     float: left;
     background-color: #111111;
     color: white;
@@ -58,6 +67,10 @@ body {
     margin-right: 6.25vw;
     float: right;
     color: white;
+    width: 3vw;
+}
+#mute img {
+    width: 3vw;
 }
 #mute:hover {
     cursor: pointer;
@@ -75,17 +88,18 @@ body {
     all: unset;
     margin-top: auto;
     margin-bottom: auto;
+    width: 3.5vw;
 }
 .mods p {
     margin: auto;
     margin-left: 0.5vw;
     margin-right: 0.5vw;
-    font-size: 1vw;
 }
 .mods button:hover {
     cursor: pointer;
 }
 .mods img {
+    width: 3.5vw;
     transition: transform 0.1s, box-shadow 0.1s;
 }
 .active-mod {
@@ -101,4 +115,42 @@ body {
     background-image: radial-gradient(circle at 50% 50%, transparent, #000 100%);
     border: #ffffff solid 0.1vw;
     pointer-events: none;
+}
+.howto {
+    margin-bottom: 2vh;
+}
+.howto h1 {
+    margin-top: 0;
+}
+.howto img {
+    width: 50vw;
+}
+.footer {
+    background-color: #111111;
+    display: flex;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    gap: 5vw;
+    padding-inline: 1vw;
+}
+.footer img {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 3vh;
+}
+.with-image {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+.footer a {
+    color: white;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    opacity: 0.5;
+    transition-duration: 0.5s;
+}
+.footer a:hover {
+    opacity: 1;
 }
