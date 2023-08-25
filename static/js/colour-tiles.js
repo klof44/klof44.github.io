@@ -28,12 +28,24 @@ let mute = false
 let board = document.getElementById("board")
 let flashlight = document.getElementById("flashlight")
 
+flashlight.style.width = board.getBoundingClientRect().width - 2.5 + "px"
+flashlight.style.height = board.getBoundingClientRect().height - 3 + "px"
+flashlight.style.top = board.getBoundingClientRect().top + "px"
+flashlight.style.left = board.getBoundingClientRect().left + "px"
+
 let mousex = 0
 let mousey = 0
 document.addEventListener("mousemove", (e) => {
     mousex = e.clientX
     mousey = e.clientY
     UpdateFL()
+})
+
+document.addEventListener("keypress", (e) => {
+    if (e.key == "r") {
+        ResetGame()
+        StartGame()
+    }
 })
 
 function StartGame() {
@@ -339,10 +351,6 @@ function ToggleFL() {
 }
 
 function UpdateFL() {
-    flashlight.style.width = board.getBoundingClientRect().width - 2 + "px"
-    flashlight.style.height = board.getBoundingClientRect().height - 2 + "px"
-    flashlight.style.top = board.getBoundingClientRect().top + "px"
-    flashlight.style.left = board.getBoundingClientRect().left + "px"
     if (flMod && time != 0)
         flashlight.style.backgroundImage = `radial-gradient(circle at ${mousex - board.getBoundingClientRect().left}px ${mousey - board.getBoundingClientRect().top}px, transparent, #000 ${((time) / 1.5)}%)`;
     else
