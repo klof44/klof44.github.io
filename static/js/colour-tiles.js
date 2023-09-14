@@ -60,7 +60,11 @@ function StartGame() {
 
     board.style.flexDirection = "row"
 
-    time = 120
+    if (htMod)
+        time = 240
+    else
+        time = 120
+    
     score = 0
     updateTime()
 
@@ -141,9 +145,11 @@ function CreateBoard() {
             flip = !flip
 
             tile.addEventListener("click", () => {
+                if (rxMod) return;
+                
                 let missed = false
                 if (tiles[i][j] == 0) {
-                    matches = searchMatches(i, j)
+                    let matches = searchMatches(i, j)
 
                     if (matches.length == 0) {
                         updateTime(-10)
@@ -159,8 +165,7 @@ function CreateBoard() {
                             document.getElementById(tile.coordinate[0] + "-" + tile.coordinate[1]).src = "/static/img/colour-tiles/" + tileNames[0]
                         })
                     })
-                }
-                else {
+                } else {
                     updateTime(-10)
                     missed = true
                 }
@@ -174,6 +179,21 @@ function CreateBoard() {
                 }
 
                 UpdateFL()
+            })
+            
+            tile.addEventListener("mouseover" , () => {
+                if (rxMod) {
+                    if (tiles[i][j] == 0) {
+                        let matches = searchMatches(i, j)
+                        
+                        matches.forEach(match => {
+                            match.forEach(tile => {
+                                tiles[tile.coordinate[0]][tile.coordinate[1]] = 0
+                                document.getElementById(tile.coordinate[0] + "-" + tile.coordinate[1]).src = "/static/img/colour-tiles/" + tileNames[0]
+                            })
+                        })
+                    }
+                }
             })
 
             board.appendChild(tile)
@@ -377,3 +397,44 @@ function ToggleHR() {
     let modMultiplier = document.getElementById("mod-multiplier");
     modMultiplier.innerHTML = `Multiplier: x${Math.round(multiplier * 100) / 100}`;
 }
+
+let htMod = false;
+function ToggleHT() {
+    if (time != 0) return;
+
+    let htIcon = document.getElementById("halftime-mod").children[0];
+
+    if (htMod) {
+        htMod = false;
+        htIcon.classList.remove("active-mod");
+        multiplier += 0.70;
+    }
+    else {
+        htMod = true;
+        htIcon.classList.add("active-mod");
+        multiplier -= 0.70;
+    }
+
+    let modMultiplier = document.getElementById("mod-multiplier");
+    modMultiplier.innerHTML = `Multiplier: x${Math.round(multiplier * 100) / 100}`;
+}
+
+let rxMod = false;
+function ToggleRX() {
+    if (time != 0) return;
+
+    let rxIcon = document.getElementById("relax-mod").children[0];
+    let modMultiplier = document.getElementById("mod-multiplier");
+
+    if (rxMod) {
+        rxMod = false;
+        rxIcon.classList.remove("active-mod");
+        modMultiplier.innerHTML = `Multiplier: x${Math.round(multiplier * 100) / 100}`;
+    }
+    else {
+        rxMod = true;
+        rxIcon.classList.add("active-mod");
+        modMultiplier.innerHTML = `Multiplier: x0 (audio muted to save your ears)`;
+    }
+}
+    
