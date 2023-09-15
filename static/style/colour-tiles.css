@@ -113,7 +113,6 @@ body {
 }
 .active-mod {
     transform: rotate(8deg) scale(1.1);
-    background-color: #fff;
     box-shadow: 0 0 1vw -0.5vw #fff;
 }
 .howto {

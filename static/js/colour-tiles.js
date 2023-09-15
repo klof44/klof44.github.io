@@ -1,4 +1,6 @@
 let tiles = []
+let width = 32;
+let height = 15;
 let tileNames = {
     0: "empty.png",
     1: "red.png",
@@ -109,9 +111,9 @@ function ResetGame() {
 }
 
 function createTiles() {
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < height; i++) {
         tiles[i] = []
-        for (let j = 0; j < 32; j++) {
+        for (let j = 0; j < width; j++) {
             let chance = Math.floor(Math.random() * 100)
             if (chance < 30) {
                 tiles[i][j] = 0
@@ -125,8 +127,8 @@ function createTiles() {
 function CreateBoard() {
     let flip = true
 
-    for (let i = 0; i < 15; i++) {
-        for (let j = 0; j < 32; j++) {
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
             let tile = document.createElement("img")
             tile.src = "/static/img/colour-tiles/" + tileNames[tiles[i][j]]
             if (hrMod) {
@@ -139,6 +141,11 @@ function CreateBoard() {
                 tile.style.backgroundColor = "#222"
             }
             flip = !flip
+            if (scorev2Mod) {
+                tile.style.width = "1.25vw"
+                tile.style.padding = "0.05vw"
+                tile.style.height = "1.25vw"
+            }
 
             tile.addEventListener("click", () => {
                 if (rxMod) return;
@@ -265,7 +272,7 @@ function searchMatches(xpos, ypos) {
         }
     }
 
-    for (let i = xpos; i < 15; i++) {
+    for (let i = xpos; i < height; i++) {
         if (tiles[i][ypos] != 0) {
             right.coordinate = [i, ypos]
             right.colour = tiles[i][ypos]
@@ -281,7 +288,7 @@ function searchMatches(xpos, ypos) {
         }
     }
 
-    for (let i = ypos; i < 32; i++) {
+    for (let i = ypos; i < width; i++) {
         if (tiles[xpos][i] != 0) {
             down.coordinate = [xpos, i]
             down.colour = tiles[xpos][i]
@@ -441,4 +448,25 @@ function ToggleRX() {
         rxIcon.classList.add("active-mod");
         modMultiplier.innerHTML = `Multiplier: x0`;
     }
+}
+
+let scorev2Mod = false;
+function ToggleSV2() {
+    if (time != 0) return;
+
+    let scorev2Icon = document.getElementById("scorev2-mod").children[0];
+
+    if (scorev2Mod) {
+        scorev2Mod = false;
+        scorev2Icon.classList.remove("active-mod");
+        height = 15;
+        width = 32;
+    }
+    else {
+        scorev2Mod = true;
+        scorev2Icon.classList.add("active-mod");
+        height = 30;
+        width = 64;
+    }
+    createTiles()
 }
