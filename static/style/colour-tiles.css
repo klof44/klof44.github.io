@@ -27,8 +27,17 @@ body {
     border: #ffffff solid 0.1vw;
     width: 86.4vw;
     height: 41.2vw;
-    padding: 0.5vw;
+    /*padding: 0.5vw;*/
     user-select: none;
+    --flashlight: radial-gradient(circle at 50% 50%, transparent, #000 100%);
+}
+#board:before {
+    position: fixed;
+    width: 86.3vw;
+    height: 41.1vw;
+    background-image: var(--flashlight);
+    pointer-events: none;
+    content: "";
 }
 #start {
     font-size: 5vw;
@@ -57,7 +66,7 @@ body {
 #reset {
     font-size: 2vw;
     width: 15vw;
-    margin-left: 6.2vw;
+    margin-left: 6.7vw;
     float: left;
     background-color: #111111;
     color: white;
@@ -106,15 +115,6 @@ body {
     transform: rotate(8deg) scale(1.1);
     background-color: #fff;
     box-shadow: 0 0 1vw -0.5vw #fff;
-}
-#flashlight {
-    display: none;
-    position: absolute;
-    width: 86vw;
-    height: 50vh;
-    background-image: radial-gradient(circle at 50% 50%, transparent, #000 100%);
-    border: #ffffff solid 0.1vw;
-    pointer-events: none;
 }
 .howto {
     margin-bottom: 2vh;

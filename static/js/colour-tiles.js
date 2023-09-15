@@ -26,12 +26,6 @@ winSound.muted = false
 let mute = false
 
 let board = document.getElementById("board")
-let flashlight = document.getElementById("flashlight")
-
-flashlight.style.width = board.getBoundingClientRect().width - 2.5 + "px"
-flashlight.style.height = board.getBoundingClientRect().height - 3 + "px"
-flashlight.style.top = board.getBoundingClientRect().top + "px"
-flashlight.style.left = board.getBoundingClientRect().left + "px"
 
 let mousex = 0
 let mousey = 0
@@ -84,7 +78,9 @@ function EndGame(restarted = false) {
 
     if (!restarted) {
         if (!mute) {
-            winSound.cloneNode(true).play()
+            let win = winSound.cloneNode(true)
+            win.play()
+            win.remove()
         }
 
         let endText = document.createElement("p")
@@ -171,10 +167,14 @@ function CreateBoard() {
                 }
                 if (!mute) {
                     if (missed) {
-                        missSound.cloneNode(true).play()
+                        let miss = missSound.cloneNode(true)
+                        miss.play()
+                        miss.remove()
                     }
                     else {
-                        hitSound.cloneNode(true).play()
+                        let hit = hitSound.cloneNode(true)
+                        hit.play()
+                        hit.remove()
                     }
                 }
 
@@ -185,6 +185,12 @@ function CreateBoard() {
                 if (rxMod) {
                     if (tiles[i][j] == 0) {
                         let matches = searchMatches(i, j)
+                        
+                        if (matches.length > 0 && !mute) {
+                            let hit = hitSound.cloneNode(true)
+                            hit.play()
+                            hit.remove()
+                        }
                         
                         matches.forEach(match => {
                             match.forEach(tile => {
@@ -351,18 +357,17 @@ function ToggleFL() {
     if (time != 0) return;
 
     let flIcon = document.getElementById("flashlight-mod").children[0];
-    let flashlight = document.getElementById("flashlight");
 
     if (flMod) {
         flMod = false;
         flIcon.classList.remove("active-mod");
-        flashlight.style.display = "none";
+        board.style.setProperty("--flashlight", "none");
         multiplier -= 0.12;
     }
     else {
         flMod = true;
         flIcon.classList.add("active-mod");
-        flashlight.style.display = "block";
+        board.style.setProperty("--flashlight",  `radial-gradient(circle at ${mousex - board.getBoundingClientRect().left}px ${mousey - board.getBoundingClientRect().top}px, transparent, #000 ${((time) / 1.5)}%)`);
         multiplier += 0.12;
     }
 
@@ -372,9 +377,9 @@ function ToggleFL() {
 
 function UpdateFL() {
     if (flMod && time != 0)
-        flashlight.style.backgroundImage = `radial-gradient(circle at ${mousex - board.getBoundingClientRect().left}px ${mousey - board.getBoundingClientRect().top}px, transparent, #000 ${((time) / 1.5)}%)`;
+        board.style.setProperty("--flashlight",  `radial-gradient(circle at ${mousex - board.getBoundingClientRect().left}px ${mousey - board.getBoundingClientRect().top}px, transparent, #000 ${((time) / 1.5)}%)`);
     else
-        flashlight.style.backgroundImage = "none";
+        board.style.setProperty("--flashlight", "none");
 }
 
 let hrMod = false;
@@ -434,7 +439,6 @@ function ToggleRX() {
     else {
         rxMod = true;
         rxIcon.classList.add("active-mod");
-        modMultiplier.innerHTML = `Multiplier: x0 (audio muted to save your ears)`;
+        modMultiplier.innerHTML = `Multiplier: x0`;
     }
 }
-    
