@@ -131,9 +131,6 @@ function CreateBoard() {
         for (let j = 0; j < width; j++) {
             let tile = document.createElement("img")
             tile.src = "/static/img/colour-tiles/" + tileNames[tiles[i][j]]
-            if (hrMod) {
-                tile.classList.add("hr-tile")
-            }
             tile.classList.add("tile")
             tile.id = i + "-" + j
             tile.draggable = false
@@ -141,10 +138,20 @@ function CreateBoard() {
                 tile.style.backgroundColor = "#222"
             }
             flip = !flip
+            if (hrMod && !scorev2Mod) {
+                tile.classList.add("hr-tile")
+            }
             if (scorev2Mod) {
-                tile.style.width = "1.25vw"
-                tile.style.padding = "0.05vw"
-                tile.style.height = "1.25vw"
+                if (hrMod) {
+                    tile.style.width = "0.3125vw"
+                    tile.style.height = "0.3125vw"
+                    tile.style.padding = "0.515vw"
+                }
+                else {
+                    tile.style.width = "1.25vw"
+                    tile.style.height = "1.25vw"
+                    tile.style.padding = "0.05vw"
+                }
             }
 
             tile.addEventListener("click", () => {
