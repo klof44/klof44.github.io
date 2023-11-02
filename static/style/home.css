@@ -11,7 +11,7 @@ body {
     top: -500px;
     min-width: 100vw;
     z-index: -1;
-    opacity: 0.05;
+    opacity: 0.08;
 }
 .invisible {
     opacity: 0;
@@ -32,7 +32,6 @@ body {
 .center p {
     text-align: center;
     font-size: 46px;
-    opacity: 0.5;
     margin-top: 10px;
     margin-bottom: 40px;
 }
@@ -48,19 +47,12 @@ body {
 }
 .icons a:hover {
     opacity: 1;
-    transform: translateY(-10px);
+    transform: translateY(-3px);
 }
 
 .contact {
     position: fixed;
     margin-top: 1vh;
-}
-.contact li {
-    margin-bottom: 20px;
-    transition-duration: 0.5s;
-}
-.contact li:hover {
-    transform: translateX(5px);
 }
 .contact img {
     display: inline-block;
@@ -76,47 +68,21 @@ body {
     align-items: center; 
     gap: 10px;
 }
-.contact button {
-    all: unset;
-    display: inline-flex;
-    align-items: center; 
-    gap: 10px;
-}
-.contact button:hover {
-    cursor: pointer;
-}
 .contact a {
     all: unset;
     display: flex;
     align-items: center;
     gap: 10px;
+    transition-duration: 0.5s;
+}
+.contact span {
+    display: flex;
+    margin: 10px;
+    margin-left: 25px;
 }
 .contact a:hover {
     cursor: pointer;
-}
-
-#copied-text {
-    border-radius: 5px;
-    background-color: #4E5D94;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-#copied-text p {
-    margin: 0;
-    padding: 5px;
-    font-size: 16px;
-}
-#copied-text-align {
-    display: flex;
-    align-items: center;
-}
-.fade-in {
-    opacity: 1 !important;
-    transition: opacity 0.5s ease;
-}
-.fade-out {
-    opacity: 0 !important;
-    transition: opacity 0.5s ease;
+    color: #00fa9a;
 }
 
 .gaming {
@@ -132,4 +98,23 @@ body {
     gap: 10px;
     color: #fff;
     text-decoration: none;
+}
+
+#background-container {
+    position: fixed;
+}
+#background {
+    height: 1600%;
+    width: 2000%;
+    background: url("/static/img/dc5.png") repeat;
+    animation: background 60s linear infinite;
+}
+
+@keyframes background {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-512px, 512px, 0);
+    }
 }
