@@ -15,6 +15,8 @@ let tileNames = {
     10: "another-green.png",
 }
 
+let combo = 0;
+
 let hitSound = new Audio("/static/audio/colour-tiles/ding.wav")
 hitSound.volume = 0.5
 
@@ -86,7 +88,7 @@ function EndGame(restarted = false) {
         }
 
         let endText = document.createElement("p")
-        endText.innerHTML = `Game Over!\r\nScore: ${document.getElementById("score").innerHTML.slice(7)}`
+        endText.innerHTML = `Game Over!\r\nScore: ${document.getElementById("score").innerHTML.slice(7)}<br>Max Combo: x${combo}`
         endText.id = "end-text"
 
         board.appendChild(endText)
@@ -184,6 +186,7 @@ function CreateBoard() {
                         let miss = missSound.cloneNode(true)
                         miss.play()
                         miss.remove()
+						combo = 0;
                     }
                     else {
                         let hit = hitSound.cloneNode(true)
@@ -191,6 +194,9 @@ function CreateBoard() {
                         hit.remove()
                     }
                 }
+
+				let comboElement = document.getElementById("combo");
+				comboElement.innerHTML = `Combo: x${combo}`;
 
                 UpdateFL()
             })
@@ -328,9 +334,11 @@ function searchMatches(xpos, ypos) {
 
 let score = 0
 function addScore() {
-    score += 1 * multiplier
+    score += 1 * multiplier * combo
     let scoreElement = document.getElementById("score")
-    scoreElement.innerHTML = `Score: ${Math.round(score * 100) / 100}`
+    scoreElement.innerHTML = `Score: ${(Math.round(score * 100) / 100).toLocaleString(undefined)}`
+
+	combo++;
 }
 
 function Mute() {

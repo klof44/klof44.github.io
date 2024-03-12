@@ -49,13 +49,16 @@ body {
     color: white;
 }
 .info {
-    width: 87.6vw;
+    width: 87vw;
     display: flex;
     margin: auto;
-    justify-content: space-around;
+}
+.flex-right {
+	margin-left: auto !important;
 }
 .info p {
     margin: 3px;
+	margin-inline: 15px;
 }
 #end-text {
     font-size: 3vw;
