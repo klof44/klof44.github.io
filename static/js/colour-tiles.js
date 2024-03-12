@@ -91,7 +91,7 @@ function EndGame(restarted = false) {
         }
 
         let endText = document.createElement("p")
-        endText.innerHTML = `Game Over!\r\nScore: ${document.getElementById("score").innerHTML.slice(7)}<br>Max Combo: x${combo}`
+        endText.innerHTML = `Game Over!\r\nScore: ${document.getElementById("score").innerHTML.slice(7)}<br>Max Combo: x${maxCombo}`
         endText.id = "end-text"
 
         board.appendChild(endText)
