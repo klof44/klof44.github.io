@@ -66,6 +66,8 @@ function StartGame() {
     score = 0
     updateTime()
 
+	combo = 0;
+
     let modsMenu = document.getElementById("mods")
     modsMenu.classList.add("mods-locked")
 
