@@ -16,6 +16,7 @@ let tileNames = {
 }
 
 let combo = 0;
+let maxCombo = 0;
 
 let hitSound = new Audio("/static/audio/colour-tiles/ding.wav")
 hitSound.volume = 0.5
@@ -188,6 +189,8 @@ function CreateBoard() {
                         let miss = missSound.cloneNode(true)
                         miss.play()
                         miss.remove()
+						if (combo > maxCombo)
+							maxCombo = combo;
 						combo = 0;
                     }
                     else {
