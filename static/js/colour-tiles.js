@@ -170,6 +170,8 @@ function CreateBoard() {
                     if (matches.length == 0) {
                         updateTime(-10)
                         missed = true
+
+						combo = 0;
                     }
 
                     matches.forEach(match => {
@@ -184,15 +186,15 @@ function CreateBoard() {
                 } else {
                     updateTime(-10)
                     missed = true
+
+					combo = 0;
                 }
+
                 if (!mute) {
                     if (missed) {
                         let miss = missSound.cloneNode(true)
                         miss.play()
                         miss.remove()
-						if (combo > maxCombo)
-							maxCombo = combo;
-						combo = 0;
                     }
                     else {
                         let hit = hitSound.cloneNode(true)
@@ -345,6 +347,9 @@ function addScore() {
     scoreElement.innerHTML = `Score: ${(Math.round(score * 100) / 100).toLocaleString(undefined)}`
 
 	combo++;
+
+	if (combo > maxCombo)
+		maxCombo = combo;
 }
 
 function Mute() {
