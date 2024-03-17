@@ -68,6 +68,7 @@ function StartGame() {
     updateTime()
 
 	combo = 0;
+	maxCombo = 0;
 
     let modsMenu = document.getElementById("mods")
     modsMenu.classList.add("mods-locked")
