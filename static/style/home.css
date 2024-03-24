@@ -27,7 +27,9 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 45%;
+	width: 12vw;
+	overflow: hidden;
+	border-radius: 50%;
 }
 .center p {
     text-align: center;
@@ -36,7 +38,6 @@ body {
     margin-bottom: 40px;
 }
 .icons {
-    margin-inline: 15vw;
     display: flex;
     justify-content: space-around;
     transition-duration: 0.5s;
@@ -46,7 +47,7 @@ body {
     transition-duration: 0.5s;
 }
 .icons a:hover {
-    opacity: 1;
+    opacity: 0.9;
     transform: translateY(-3px);
 }
 
@@ -82,7 +83,7 @@ body {
 }
 .contact a:hover {
     cursor: pointer;
-    color: #00fa9a;
+    color: #0070b3;
 }
 
 .gaming {
@@ -90,12 +91,12 @@ body {
     bottom: 0;
     left: 0;
     margin: 20px;
-    font-size: 10px;
+    font-size: 6px;
 }
 .gaming a {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 3px;
     color: #fff;
     text-decoration: none;
 }
@@ -107,7 +108,7 @@ body {
     height: 1600%;
     width: 2000%;
     background: url("/static/img/dc5.png") repeat;
-    animation: background 60s linear infinite;
+    animation: background 90s linear infinite;
 }
 
 @keyframes background {
