@@ -86,21 +86,6 @@ body {
     color: #0070b3;
 }
 
-.gaming {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    margin: 20px;
-    font-size: 6px;
-}
-.gaming a {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    color: #fff;
-    text-decoration: none;
-}
-
 #background-container {
     position: fixed;
 }
