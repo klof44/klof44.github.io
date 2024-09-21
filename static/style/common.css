@@ -1,0 +1,38 @@
+body {
+    background-color: #111118;
+    color: #fff;
+    font-family: Consolas;
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
+    background-color: #010108;
+    display: flex;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    gap: 5vw;
+    padding-inline: 1vw;
+    margin-top: 5vw;
+}
+.footer img {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 3vh;
+}
+.with-image {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+.footer a {
+    color: white;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    opacity: 0.5;
+    transition-duration: 0.5s;
+}
+.footer a:hover {
+    opacity: 1;
+}

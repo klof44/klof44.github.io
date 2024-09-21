@@ -1,0 +1,74 @@
+.main {
+    display: flex;
+    margin-top: 8vh;
+    margin-inline: 6vw;
+    gap: 2vw;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.img-15 {
+    width: 15vw;
+}
+
+.img-10 {
+    width: 10vw;
+}
+
+.img-40 {
+    width: 40vw;
+}
+
+.yap p {
+    width: 70vw;
+    font-size: large;
+}
+
+a:visited {
+    color: #ce29d6;
+}
+
+.centre {
+    margin: auto;
+}
+
+.inline {
+    display: inline;
+}
+
+.max-width {
+    width: 100vw;
+}
+
+.centre-text {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.download {
+    display: flex;
+    gap: 15vw;
+    margin-bottom: 2vw;
+}
+
+.centre-vert {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.screenshot {
+    display: flex;
+    gap: 5vw;
+    margin-bottom: 5vw;
+    flex-wrap: wrap;
+}
+
+.img-vh-10 {
+    height: 10vh;
+}
+
+.img-vh-3 {
+    height: 3vh;
+}
