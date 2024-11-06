@@ -20,33 +20,24 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-	width: 12vw;
+	width: max(12vw, 150px);
+    height: max(12vw, 150px);
 	overflow: hidden;
 	border-radius: 50%;
 }
 .center p {
     text-align: center;
-    font-size: 46px;
+    font-size: 75px;
     margin-top: 10px;
     margin-bottom: 40px;
 }
-.icons {
-    display: flex;
-    justify-content: space-around;
-    transition-duration: 0.5s;
-}
-.icons a {
-    opacity: 0.6;
-    transition-duration: 0.5s;
-}
-.icons a:hover {
-    opacity: 0.9;
-    transform: translateY(-3px);
-}
 
 .contact {
+    margin-top: 30px;
     position: fixed;
-    margin-top: 1vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 .contact img {
     display: inline-block;
@@ -55,24 +46,20 @@
     display: inline-block;
     margin-left: 10px;
     margin: 0;
-    font-size: 20px;
-}
-#discord-contact {
-    display: inline-flex;
-    align-items: center; 
-    gap: 10px;
 }
 .contact a {
     all: unset;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     transition-duration: 0.5s;
 }
 .contact span {
     display: flex;
-    margin: 10px;
     margin-left: 25px;
+    font-size: max(1vw, 15px);
+    align-items: center; 
+    gap: 10px;
 }
 .contact a:hover {
     cursor: pointer;
