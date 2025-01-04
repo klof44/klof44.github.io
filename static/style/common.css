@@ -1,7 +1,12 @@
+@font-face {
+    font-family: JetBrains Mono;
+    src: url('/static/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
 body {
     background-color: #111118;
     color: #fff;
-    font-family: Consolas;
+    font-family: JetBrains Mono;
     margin: 0;
     padding: 0;
 }
