@@ -105,3 +105,18 @@
 .fade-in-text {
     animation: fade-in 0.5s;
 }
+
+@keyframes float-in-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.float-in-left {
+    animation: float-in-left 0.5s ease-out;
+}
